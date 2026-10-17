@@ -1,0 +1,8 @@
+# Folders
+.vscode/
+build/
+
+# Files
+*.exe
+*.pdb
+vulkan_basics
