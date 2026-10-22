@@ -18,15 +18,23 @@ void _darray_destroy(void* array);
 b8 _darray_is_resizable(void *array);
 void *_darray_resize(void* array);
 
+void *_darray_resize_len(u64 len, u64 stride);
+
 #define _darray_header(a) ((_Darray_Header *)(a) - 1)
 
-#define darray_create(t) _darray_create(DARRAY_DEFAULT_CAPACITY, sizeof (t))
 
-#define darray_reserve(t, s) _darray_create(s , sizeof (t))
+#define darray_create(t)     _darray_create(DARRAY_DEFAULT_CAPACITY, sizeof (t))
 
-#define darray_len(a) _darray_header((a))->len
-#define darray_capacity(a) _darray_header((a))->cap
-#define darray_stride(a) _darray_header((a))->stride
+#define darray_reserve(t, s) _darray_create((s), sizeof (t))
+
+#define darray_resize(t, s) (_darray_resize_len((s), sizeof (t)))
+
+#define darray_destroy(arr)  _darray_destroy((arr))
+
+
+#define darray_len(a)        (_darray_header((a))->len)
+#define darray_capacity(a)   (_darray_header((a))->cap)
+#define darray_stride(a)     (_darray_header((a))->stride)
 
 #define darray_push(a, v)               \
 do {                                    \
@@ -44,3 +52,5 @@ do {\
     _darray_header((a))->len--;\
   }\
 } while(0)
+
+#define darray_clear(a) (_darray_header((a))->len = 0)

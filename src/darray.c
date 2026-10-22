@@ -24,6 +24,7 @@ void _darray_destroy(void *array)
 {
   _Darray_Header* header = _darray_header(array);
   free((void *)header);
+  array = 0;
 }
 
 b8 _darray_is_resizable(void *array)
@@ -56,4 +57,12 @@ void *_darray_resize(void *array)
 
   _darray_destroy(array);
   return temp;
+}
+
+void *_darray_resize_len(u64 len, u64 stride)
+{
+  void *array = _darray_create(len, stride);
+  _darray_header(array)->len = len;
+
+  return array;
 }

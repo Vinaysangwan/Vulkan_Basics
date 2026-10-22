@@ -1,8 +1,10 @@
 cmake_minimum_required(VERSION 3.28)
-project(vulkan_basics LANGUAGES C)
+project(vulkan_basics)
 
 find_package(Vulkan REQUIRED COMPONENTS volk shaderc_combined)
 
+set(CMAKE_C_STANDARD 23)
+set(CMAKE_C_STANDARD_REQUIRED ON)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR})
 
@@ -20,8 +22,9 @@ target_include_directories(${PROJECT_NAME} PRIVATE
 )
 
 target_link_libraries(${PROJECT_NAME} PRIVATE
-  Vulkan::Vulkan
-  Vulkan::volk
   Vulkan::shaderc_combined
+
   SDL3::SDL3-static
+
+  vma_c
 )

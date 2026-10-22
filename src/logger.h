@@ -1,7 +1,5 @@
 #pragma once
 
-#include <stdio.h>
-
 #define LOG_INFO(msg, ...)     \
 do {                           \
   printf("[INFO]: ");          \
